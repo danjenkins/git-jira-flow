@@ -51,10 +51,10 @@ function cmd_start() {
     if [[ -z "$issue_name" ]]; then
         issue_name=${issue_summary// /_}
     fi
-    issue_branch="$issue_key/$issue_name"
+    issue_branch="feature/$issue_key/$issue_name"
 
     if [[ -n "$HOTFIX" ]]; then
-        issue_branch="!$issue_branch"
+        issue_branch="hotfix/$issue_branch"
         start_branch="$JIRA_MASTER_BRANCH"
         remote="$JIRA_MASTER_REMOTE"
     else
@@ -68,7 +68,7 @@ function cmd_start() {
     git checkout -b "$issue_branch" "$start_branch"
 
     puts_step "Updating issue: $issue_key"
-    jira_cmd -a progressIssue --issue "$issue_key" --step "Start Progress"
+    jira_cmd -a progressIssue --issue "$issue_key" --step "$JIRA_START_WORKFLOW"
     jira_cmd -a updateIssue --issue "$issue_key" --assignee "$JIRA_USER" >/dev/null
 }
 
