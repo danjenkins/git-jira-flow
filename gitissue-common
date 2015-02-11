@@ -80,6 +80,9 @@ function load_jira_config() {
     JIRA_MASTER_REMOTE=$(_get_git_config jiraflow.master.remote "origin")
     JIRA_START_WORKFLOW=$(_get_git_config jiraflow.workflow.start "Start Progress")
     JIRA_FINISH_WORKFLOW=$(_get_git_config jiraflow.workflow.finish "Resolve Issue")
+    BRANCH_NAME_SEPARATOR=$(_get_git_config jiraflow.branch.separator "_")
+    BRANCH_FEATURE_PREFIX=$(_get_git_config jiraflow.branch.feature_prefix "")
+    BRANCH_HOTFIX_PREFIX=$(_get_git_config jiraflow.branch.hotfix_prefix "")
 }
 
 function _get_git_config() {

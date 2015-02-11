@@ -49,12 +49,12 @@ function cmd_start() {
         issue_name="$BRANCH_NAME"
     fi
     if [[ -z "$issue_name" ]]; then
-        issue_name=${issue_summary// /_}
+        issue_name=${issue_summary// /$BRANCH_NAME_SEPARATOR}
     fi
-    issue_branch="feature/$issue_key/$issue_name"
+    issue_branch="$BRANCH_FEATURE_PREFIX$issue_key/$issue_name"
 
     if [[ -n "$HOTFIX" ]]; then
-        issue_branch="hotfix/$issue_branch"
+        issue_branch="$BRANCH_HOTFIX_PREFIX$issue_branch"
         start_branch="$JIRA_MASTER_BRANCH"
         remote="$JIRA_MASTER_REMOTE"
     else
